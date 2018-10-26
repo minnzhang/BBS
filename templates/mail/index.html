@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}mail{% endblock%}
+{% block main %}
+
+<div id="main">
+    <div id="content">
+        <div class="panel">
+            <div class='span-primary submit_btn'>发送邮件</div>
+            <div class="inner post">
+                <form method="post" action="{{ url_for('.add',token=token) }}">
+                    <fieldset>
+                        <textarea autofocus class='span9' id='title'
+                                  name='title' rows='1' placeholder="title"></textarea>
+                        <input type="text" name="receiver" placeholder="receiver_id">
+                        <div class='markdown_editor in_editor'>
+                            <div class='markdown_in_editor'>
+                                <textarea class='editor' name='content' rows='10' placeholder='content'></textarea>
+                                <div class='editor_buttons'>
+                                    <input type="submit" class='span-primary submit_btn' data-loading-text="发送中"
+                                           value="发送邮件">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+
+            </div>
+            <div>
+                <fieldset>
+                    <p>收到邮件</p>
+                        {% for r in received %}
+                        <div>
+                            <a href="{{ url_for('.view', id = r.id) }}"> {{ r.title }}</a>
+                        </div>
+                        {% endfor %}
+                        <p>发送邮件</p>
+                        {% for s in send %}
+                        <div>
+                            <a href="{{ url_for('.view', id = s.id) }}"> {{ s.title }}</a>
+                        </div>
+                        {% endfor %}
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

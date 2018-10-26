@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}detail_mail{% endblock%}
+{% block main %}
+
+
+<p>发件人 id: {{ mail.sender_id }}</p>
+<p>收件人 id: {{ mail.receiver_id }}</p>
+<p>内容</p>
+<p>{{ mail.content }}</p>
+
+{% endblock %}

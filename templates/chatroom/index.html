@@ -1,0 +1,15 @@
+{% extends "/base.html" %}
+{% block title %}chatroom{% endblock%}
+{% block main %}
+<div id="main">
+<div class="panel">
+    <div class="inner">
+        <h1>chat</h1>
+        <form action="{{ url_for('.enter') }}" method="POST">
+            <input type=text name="name" placeholder="昵称">
+            <button>进入聊天室</button>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock%}

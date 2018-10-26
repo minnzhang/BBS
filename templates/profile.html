@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}profile{% endblock%}
+{% block main %}
+
+<div id="main">
+
+    <div id="content">
+        <div class="panel">
+            <div class="header">
+                <ul class="breadcrumb">
+                    <li><a href="/topic/">主页</a><span class="divider">/</span></li>
+                </ul>
+            </div>
+            <div class="inner userinfo">
+                <div class="user_big_avatar">
+                    <img src="{{ user.image }}">
+                </div>
+                <a class="dark">{{ user.username }}</a>
+                <p class="col_fade">注册时间 {{ user.created_time | format_time }}</p>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="header">
+                <span class="col_fade">最近创建的话题</span>
+            </div>
+            <div class="cell">
+                <div class="topic_list">
+                    {% for t in ms_created %}
+                    <div class="cell">
+                        <a class="user_avatar pull-left">
+                            <img src="{{ t.user().image }}"/>
+                        </a>
+                        <div class="topic_title_wrapper">
+                            <span>{{ t.replies() | count }} / {{ t.views }}</span>
+                            {# count(t.replies()) #}
+                            {# <span>{{ t.reply_count() }} / {{ t.views }}</span> #}
+                            <a class="topic_title" href="{{ url_for('dou_topic.detail', id=t.id) }}">
+                                {{ t.title }}
+                            </a>
+                            <a class="last_time pull-right">
+                                <img class="user_small_avatar"
+                                     src="{{ t.last_reply().user().image }}">
+                                <span class="last_active_time">{{ t.last_reply().created_time | format_time }}</span>
+                            </a>
+                        </div>
+
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="header">
+                    <span class="col_fade">最近参与的话题</span>
+                </div>
+
+                <div class="cell">
+                    <div class="topic_list">
+                        {% for t in ms_recented %}
+                        <div class="cell">
+                            <a class="user_avatar pull-left">
+                                <img src="{{ t.user().image }}"/>
+                            </a>
+                            <div class="topic_title_wrapper">
+                                <span>{{ t.replies() | count }} / {{ t.views }}</span>
+                                {# count(t.replies()) #}
+                                {# <span>{{ t.reply_count() }} / {{ t.views }}</span> #}
+                                <a class="topic_title" href="{{ url_for('dou_topic.detail', id=t.id) }}">
+                                    {{ t.title }}
+                                </a>
+                                <a class="last_time pull-right">
+                                    <img class="user_small_avatar"
+                                         src="{{ t.last_reply().user().image }}">
+                                    <span class="last_active_time">{{ t.last_reply().created_time | format_time }}</span>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+                {% endblock %}
